@@ -1,0 +1,72 @@
+[
+  {
+    "objet": "bouteille d’eau",
+    "materiau": "plastique",
+    "consigne": "Bac jaune"
+  },
+  {
+    "objet": "canette",
+    "materiau": "métal",
+    "consigne": "Bac jaune"
+  },
+  {
+    "objet": "pot de yaourt",
+    "materiau": "plastique",
+    "consigne": "Bac jaune"
+  },
+  {
+    "objet": "bouteille de vin",
+    "materiau": "verre",
+    "consigne": "Bac verre"
+  },
+  {
+    "objet": "pile",
+    "materiau": "métal",
+    "consigne": "Point de collecte spécial"
+  },
+  {
+    "objet": "papier journal",
+    "materiau": "papier",
+    "consigne": "Bac jaune"
+  },
+  {
+    "objet": "sac plastique",
+    "materiau": "plastique",
+    "consigne": "Bac jaune"
+  },
+  {
+    "objet": "bocal",
+    "materiau": "verre",
+    "consigne": "Bac verre"
+  },
+  {
+    "objet": "aérosol",
+    "materiau": "métal",
+    "consigne": "Bac jaune"
+  },
+  {
+    "objet": "brique alimentaire",
+    "materiau": "carton",
+    "consigne": "Bac jaune"
+  },
+  {
+    "objet": "magazine",
+    "materiau": "papier",
+    "consigne": "Bac jaune"
+  },
+  {
+    "objet": "flacon de shampoing",
+    "materiau": "plastique",
+    "consigne": "Bac jaune"
+  },
+  {
+    "objet": "barquette en aluminium",
+    "materiau": "aluminium",
+    "consigne": "Bac jaune"
+  },
+  {
+    "objet": "emballage polystyrène",
+    "materiau": "polystyrène",
+    "consigne": "Déchetterie"
+  }
+]
