@@ -1,6 +1,4 @@
 
-### `Recycl-App` — `README.md`
-```markdown
 # Recycl-App
 
 Application web simple pour **aider au tri sélectif** (catégories, conseils, recherche).
