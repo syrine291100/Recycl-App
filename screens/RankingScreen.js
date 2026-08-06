@@ -1,33 +1,60 @@
-import React, { useEffect, useState } from 'react';
-import { View, Text, StyleSheet, ScrollView } from 'react-native';
-import { getRanking } from '../utils/storage';
+import React, { useCallback, useState } from 'react';
+import { View, Text, FlatList, Pressable, StyleSheet } from 'react-native';
+import { useFocusEffect } from '@react-navigation/native';
+import { getRanking } from '../util/storage';
 
 export default function RankingScreen({ navigation }) {
   const [users, setUsers] = useState([]);
 
-  useEffect(() => {
-    getRanking().then(setUsers);
-  }, []);
+  useFocusEffect(
+    useCallback(() => {
+      getRanking().then(setUsers);
+    }, []),
+  );
 
   return (
-    <ScrollView contentContainerStyle={styles.container}>
-      <Text style={styles.title}>📊 Classement</Text>
-      {users.length === 0 ? (
-        <Text style={styles.empty}>Aucun utilisateur pour le moment.</Text>
-      ) : (
-        users.map((u, i) => (
-          <Text key={i} style={styles.line}>
-            {i+1}. {u.username} — {u.score} pts — {u.level}
-          </Text>
-        ))
-      )}
-      <Text style={{margin:16}} onPress={() => navigation.goBack()}>Retour</Text>
-    </ScrollView>
+    <View style={styles.container}>
+      <Text style={styles.title}>Classement</Text>
+      <Text style={styles.subtitle}>Les meilleurs éco-scores enregistrés sur cet appareil.</Text>
+
+      <FlatList
+        data={users}
+        keyExtractor={(item) => item.username}
+        contentContainerStyle={users.length ? styles.list : styles.emptyList}
+        renderItem={({ item, index }) => (
+          <View style={[styles.row, index === 0 && styles.firstRow]}>
+            <Text style={styles.position}>{index + 1}</Text>
+            <View style={styles.userInfo}>
+              <Text style={styles.username}>{item.username}</Text>
+              <Text style={styles.level}>{item.level}</Text>
+            </View>
+            <Text style={styles.score}>{item.score} pts</Text>
+          </View>
+        )}
+        ListEmptyComponent={<Text style={styles.empty}>Aucun utilisateur pour le moment.</Text>}
+      />
+
+      <Pressable style={styles.back} onPress={() => navigation.goBack()}>
+        <Text style={styles.backText}>Retour</Text>
+      </Pressable>
+    </View>
   );
 }
+
 const styles = StyleSheet.create({
-  container: { flexGrow:1, alignItems:'center', backgroundColor:'#f6ffe5', padding:22 },
-  title: { fontSize:22, fontWeight:'bold', marginBottom:18, color:'#228B22' },
-  empty: { color:'#999', fontStyle:'italic', marginTop:50 },
-  line: { fontSize:16, marginBottom:6 }
+  container: { flex: 1, backgroundColor: '#F4F8F2', padding: 24, paddingTop: 64 },
+  title: { fontSize: 28, fontWeight: '800', color: '#14532D' },
+  subtitle: { color: '#4B5563', marginTop: 6, marginBottom: 18 },
+  list: { paddingBottom: 20 },
+  emptyList: { flexGrow: 1, justifyContent: 'center' },
+  row: { flexDirection: 'row', alignItems: 'center', backgroundColor: '#FFFFFF', padding: 16, borderRadius: 14, marginBottom: 10 },
+  firstRow: { backgroundColor: '#FEF3C7' },
+  position: { width: 34, fontSize: 20, fontWeight: '800', color: '#166534' },
+  userInfo: { flex: 1 },
+  username: { fontWeight: '800', color: '#1F2937' },
+  level: { color: '#6B7280', fontSize: 12, marginTop: 3 },
+  score: { color: '#15803D', fontWeight: '800' },
+  empty: { textAlign: 'center', color: '#6B7280' },
+  back: { alignItems: 'center', padding: 14 },
+  backText: { color: '#166534', fontWeight: '700' },
 });
